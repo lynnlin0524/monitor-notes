@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-operated-ingress
+  namespace: monitor
+  annotations:
+    nginx.ingress.kubernetes.io/http-snippet: |
+      proxy_ignore_client_abort on;
+    nginx.ingress.kubernetes.io/proxy-next-upstream: error timeout http_502 http_503 http_504 non_idempotent
+    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: '15'
+    nginx.ingress.kubernetes.io/proxy-next-upstream-tries: '3'
+    nginx.ingress.kubernetes.io/proxy-body-size: '50m'
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: your-host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus-operated
+                port:
+                  number: 9090
