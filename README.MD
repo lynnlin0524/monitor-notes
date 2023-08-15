@@ -1,4 +1,4 @@
-# Monitoring Setup for AKS 🚀
+# Monitoring Setup for AKS
 
 Welcome to the Monitoring Setup guide for Azure Kubernetes Service (AKS). This repository provides step-by-step instructions to help you configure Grafana and Prometheus in your AKS cluster.
 
